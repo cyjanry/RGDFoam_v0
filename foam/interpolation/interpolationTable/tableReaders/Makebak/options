@@ -1,0 +1,6 @@
+EXE_INC = \
+        -I./openfoam \
+        -I./csv
+
+LIB_LIBS = \
+        -lfoam

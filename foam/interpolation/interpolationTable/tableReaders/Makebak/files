@@ -1,0 +1,6 @@
+tableReaders.C
+openFoam/openFoamTableReaders.C
+csv/csvTableReaders.C
+
+
+LIB=/home/jiang/OpenFOAM/OpenFOAM-dev/src/OpenFOAM/interpolations/interpolationTable/tableReaders/Make/libtableReader
