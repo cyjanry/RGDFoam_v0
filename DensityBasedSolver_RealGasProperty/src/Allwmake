@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wmake libso godunovFlux
+wmake libso timeStepping
+wmake transonicMRFDyMRealFoam
+wmake transonicMRFDyMFoam
+
