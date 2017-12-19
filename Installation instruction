@@ -1,0 +1,119 @@
+The instruction for installation of the look up table method and the real gas property based Riemann solver.
+
+1.  Look up table metheod.
+Copy the following fileds to the specified directory:
+
+For basic: 
+
+./basicThermo
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/basicThermo/basicThermo.C
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/basicThermo/basicThermo.H
+
+
+
+./psiThermo
+
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/psiThermo/hTabularPsiThermo/hTabularPsiThermo.H
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/psiThermo/hTabularPsiThermo/hTabularPsiThermos.C
+
+
+
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/basic/psiThermo/basicPsiThermo/makeBasicPsiThermo.H
+
+
+
+./tabularThermo
+
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/tabularThermo/heTabularThermo.C
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/tabularThermo/heTabularThermo.H
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/tabularThermo/tabularThermo.C
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/tabularThermo/tabularThermo.H
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/tabularThermo/tabularThermos.C
+
+
+./mixtures
+
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/mixtures/basicMixture/basicMixture.C
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/mixtures/basicMixture/basicMixture.H
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/mixtures/basicMixture/basicMixtures.C
+$FOAM/foam-extend-3.0/src/thermophysicalModels/basic/mixtures/basicMixture/makeBasicMixture.H
+
+
+Add the following line into Make/files:
+
+psiThermo/hTabularPsiThermo/hTabularPsiThermos.C
+
+
+Add the following line into Make/option:
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(FOAM_SRC)/thermophysicalModels/specie/lnInclude \
+    -I$(FOAM_SRC)/thermophysicalModels/basic/lnInclude \
+    -I$(LIB_SRC)/meshTools/lnInclude \
+    -I$(FOAM_SRC)/foam/interpolations
+
+
+
+
+For specie:
+./equationOfState
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/equationOfState/tabularEOS/makeEos.C
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/equationOfState/tabularEOS/tabularEOS.C
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/equationOfState/tabularEOS/tabularEOS.H
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/equationOfState/tabularEOS/tabularEOSI.H
+
+./thermo/hTabularThermo
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/hTabular/hTabularThermo.C
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/hTabular/hTabularThermo.H
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/hTabular/hTabularThermoI.H
+
+
+./thermo/speciethermo
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/specieThermo/thermo/Thermo.C
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/specieThermo/thermo/Thermo.H
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/specieThermo/thermo/ThermoI.H
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/thermo/specieThermo/thermo/ThermoI.H.bbak
+
+
+
+./transport
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/transport/tabular/tabularTransport.C
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/transport/tabular/tabularTransport.H
+/home/uqjqi/foam/foam-extend-3.0/src/thermophysicalModels/specie/transport/tabular/tabularTransportI.H
+
+
+Add the following lines into Make/files
+$(equationOfState)/tabularEOS/makeEos.C
+
+
+
+For 2D table:
+src/foam//interpolations/.
+
+/home/uqjqi/foam/foam-extend-3.0/src/foam/interpolations/extrapolation2DTable/extrapolation2DTable.C
+/home/uqjqi/foam/foam-extend-3.0/src/foam/interpolations/extrapolation2DTable/extrapolation2DTable.H
+
+
+./interpolationTable/
+/home/uqjqi/foam/foam-extend-3.0/src/foam/interpolations/interpolationTable/tableReaders/.
+
+Then add the following lines into Make/files
+
+
+$(interpolations)/interpolationTable/tableReaders/tableReaders.C
+$(interpolations)/interpolationTable/tableReaders/openFoam/openFoamTableReaders.C
+$(interpolations)/interpolationTable/tableReaders/csv/csvTableReaders.C
+
+
+
+
+Back to basic and specie, run the following command:
+
+$wmakeLnincludeAll
+$wmake libso
+
+
+Then come to the ./src directory, run ./Allwmake
+
+
+
+
